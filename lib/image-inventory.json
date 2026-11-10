@@ -1,0 +1,489 @@
+{
+  "interiorsCount": 55,
+  "rootCount": 5,
+  "totalCount": 60,
+  "rootItems": [
+    {
+      "file": "contact.jpg",
+      "width": 1920,
+      "height": 1080,
+      "orientation": "Landscape",
+      "aspect": 1.78,
+      "sizeKb": 119
+    },
+    {
+      "file": "craft.jpg",
+      "width": 1920,
+      "height": 1080,
+      "orientation": "Landscape",
+      "aspect": 1.78,
+      "sizeKb": 129
+    },
+    {
+      "file": "details.jpg",
+      "width": 1920,
+      "height": 1080,
+      "orientation": "Landscape",
+      "aspect": 1.78,
+      "sizeKb": 112
+    },
+    {
+      "file": "interior-poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "orientation": "Landscape",
+      "aspect": 1.78,
+      "sizeKb": 106
+    },
+    {
+      "file": "og.jpg",
+      "width": 1200,
+      "height": 630,
+      "orientation": "Landscape",
+      "aspect": 1.9,
+      "sizeKb": 75
+    }
+  ],
+  "interiors": [
+    {
+      "file": "1.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 87
+    },
+    {
+      "file": "11.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 69
+    },
+    {
+      "file": "12.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 136
+    },
+    {
+      "file": "15.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 79
+    },
+    {
+      "file": "17.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 47
+    },
+    {
+      "file": "18.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 95
+    },
+    {
+      "file": "2.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 73
+    },
+    {
+      "file": "20.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 78
+    },
+    {
+      "file": "21.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 76
+    },
+    {
+      "file": "23.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 70
+    },
+    {
+      "file": "24.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 73
+    },
+    {
+      "file": "26.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 76
+    },
+    {
+      "file": "27.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 100
+    },
+    {
+      "file": "28.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 78
+    },
+    {
+      "file": "3.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 88
+    },
+    {
+      "file": "30.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 69
+    },
+    {
+      "file": "32.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 74
+    },
+    {
+      "file": "33.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 75
+    },
+    {
+      "file": "34.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 82
+    },
+    {
+      "file": "37.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 72
+    },
+    {
+      "file": "38.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 84
+    },
+    {
+      "file": "4.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 115
+    },
+    {
+      "file": "42.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 74
+    },
+    {
+      "file": "43.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 68
+    },
+    {
+      "file": "45.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 34
+    },
+    {
+      "file": "46.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 68
+    },
+    {
+      "file": "47.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 35
+    },
+    {
+      "file": "48.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 70
+    },
+    {
+      "file": "5.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 78
+    },
+    {
+      "file": "50.jpeg",
+      "width": 1600,
+      "height": 737,
+      "orientation": "Landscape",
+      "aspect": 2.17,
+      "sizeKb": 53
+    },
+    {
+      "file": "6.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 72
+    },
+    {
+      "file": "60.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 80
+    },
+    {
+      "file": "68.jpeg",
+      "width": 1280,
+      "height": 960,
+      "orientation": "Landscape",
+      "aspect": 1.33,
+      "sizeKb": 93
+    },
+    {
+      "file": "7.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 72
+    },
+    {
+      "file": "73.jpeg",
+      "width": 590,
+      "height": 1280,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 58
+    },
+    {
+      "file": "74.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 106
+    },
+    {
+      "file": "75.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 95
+    },
+    {
+      "file": "8.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 84
+    },
+    {
+      "file": "80.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 62
+    },
+    {
+      "file": "81.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 79
+    },
+    {
+      "file": "82.jpeg",
+      "width": 1599,
+      "height": 899,
+      "orientation": "Landscape",
+      "aspect": 1.78,
+      "sizeKb": 76
+    },
+    {
+      "file": "83.jpeg",
+      "width": 1280,
+      "height": 570,
+      "orientation": "Landscape",
+      "aspect": 2.25,
+      "sizeKb": 68
+    },
+    {
+      "file": "85.jpeg",
+      "width": 960,
+      "height": 1280,
+      "orientation": "Portrait",
+      "aspect": 0.75,
+      "sizeKb": 90
+    },
+    {
+      "file": "87.jpeg",
+      "width": 899,
+      "height": 1599,
+      "orientation": "Portrait",
+      "aspect": 0.56,
+      "sizeKb": 115
+    },
+    {
+      "file": "88.jpeg",
+      "width": 960,
+      "height": 1280,
+      "orientation": "Portrait",
+      "aspect": 0.75,
+      "sizeKb": 148
+    },
+    {
+      "file": "9.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 71
+    },
+    {
+      "file": "94.jpeg",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "Portrait",
+      "aspect": 0.75,
+      "sizeKb": 115
+    },
+    {
+      "file": "95.jpeg",
+      "width": 899,
+      "height": 1599,
+      "orientation": "Portrait",
+      "aspect": 0.56,
+      "sizeKb": 120
+    },
+    {
+      "file": "97.jpeg",
+      "width": 737,
+      "height": 1600,
+      "orientation": "Portrait",
+      "aspect": 0.46,
+      "sizeKb": 91
+    },
+    {
+      "file": "bedroom.jpg",
+      "width": 1000,
+      "height": 1250,
+      "orientation": "Portrait",
+      "aspect": 0.8,
+      "sizeKb": 67
+    },
+    {
+      "file": "ceiling-lighting.jpg",
+      "width": 1000,
+      "height": 1250,
+      "orientation": "Portrait",
+      "aspect": 0.8,
+      "sizeKb": 83
+    },
+    {
+      "file": "custom-woodcraft.jpg",
+      "width": 1000,
+      "height": 1250,
+      "orientation": "Portrait",
+      "aspect": 0.8,
+      "sizeKb": 66
+    },
+    {
+      "file": "living-room.jpg",
+      "width": 1000,
+      "height": 1250,
+      "orientation": "Portrait",
+      "aspect": 0.8,
+      "sizeKb": 84
+    },
+    {
+      "file": "modular-kitchen.jpg",
+      "width": 1000,
+      "height": 1250,
+      "orientation": "Portrait",
+      "aspect": 0.8,
+      "sizeKb": 64
+    },
+    {
+      "file": "wardrobes-storage.jpg",
+      "width": 1000,
+      "height": 1250,
+      "orientation": "Portrait",
+      "aspect": 0.8,
+      "sizeKb": 109
+    }
+  ]
+}

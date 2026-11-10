@@ -1,0 +1,429 @@
+{
+  "totalConverted": 60,
+  "totalOrigKb": 4972.3,
+  "totalWebpKb": 4227,
+  "totalSavedKb": 745.3,
+  "totalSavedPercent": 15,
+  "conversions": [
+    {
+      "origFile": "public/images/contact.jpg",
+      "webpFile": "public/images/contact.webp",
+      "origKb": 119.2,
+      "webpKb": 116.6,
+      "savedPercent": 2.2
+    },
+    {
+      "origFile": "public/images/craft.jpg",
+      "webpFile": "public/images/craft.webp",
+      "origKb": 128.9,
+      "webpKb": 111.2,
+      "savedPercent": 13.8
+    },
+    {
+      "origFile": "public/images/details.jpg",
+      "webpFile": "public/images/details.webp",
+      "origKb": 111.7,
+      "webpKb": 95.6,
+      "savedPercent": 14.4
+    },
+    {
+      "origFile": "public/images/interior-poster.jpg",
+      "webpFile": "public/images/interior-poster.webp",
+      "origKb": 105.6,
+      "webpKb": 89.9,
+      "savedPercent": 14.8
+    },
+    {
+      "origFile": "public/images/interiors/1.jpeg",
+      "webpFile": "public/images/interiors/1.webp",
+      "origKb": 86.6,
+      "webpKb": 72.8,
+      "savedPercent": 16
+    },
+    {
+      "origFile": "public/images/interiors/11.jpeg",
+      "webpFile": "public/images/interiors/11.webp",
+      "origKb": 68.6,
+      "webpKb": 55.4,
+      "savedPercent": 19.2
+    },
+    {
+      "origFile": "public/images/interiors/12.jpeg",
+      "webpFile": "public/images/interiors/12.webp",
+      "origKb": 135.5,
+      "webpKb": 117.7,
+      "savedPercent": 13.2
+    },
+    {
+      "origFile": "public/images/interiors/15.jpeg",
+      "webpFile": "public/images/interiors/15.webp",
+      "origKb": 79.5,
+      "webpKb": 66.6,
+      "savedPercent": 16.1
+    },
+    {
+      "origFile": "public/images/interiors/17.jpeg",
+      "webpFile": "public/images/interiors/17.webp",
+      "origKb": 46.6,
+      "webpKb": 26.3,
+      "savedPercent": 43.5
+    },
+    {
+      "origFile": "public/images/interiors/18.jpeg",
+      "webpFile": "public/images/interiors/18.webp",
+      "origKb": 95.1,
+      "webpKb": 83.2,
+      "savedPercent": 12.6
+    },
+    {
+      "origFile": "public/images/interiors/2.jpeg",
+      "webpFile": "public/images/interiors/2.webp",
+      "origKb": 72.7,
+      "webpKb": 55.7,
+      "savedPercent": 23.4
+    },
+    {
+      "origFile": "public/images/interiors/20.jpeg",
+      "webpFile": "public/images/interiors/20.webp",
+      "origKb": 77.5,
+      "webpKb": 62.1,
+      "savedPercent": 19.9
+    },
+    {
+      "origFile": "public/images/interiors/21.jpeg",
+      "webpFile": "public/images/interiors/21.webp",
+      "origKb": 76.3,
+      "webpKb": 69.3,
+      "savedPercent": 9.2
+    },
+    {
+      "origFile": "public/images/interiors/23.jpeg",
+      "webpFile": "public/images/interiors/23.webp",
+      "origKb": 69.5,
+      "webpKb": 55.9,
+      "savedPercent": 19.5
+    },
+    {
+      "origFile": "public/images/interiors/24.jpeg",
+      "webpFile": "public/images/interiors/24.webp",
+      "origKb": 72.8,
+      "webpKb": 51.9,
+      "savedPercent": 28.7
+    },
+    {
+      "origFile": "public/images/interiors/26.jpeg",
+      "webpFile": "public/images/interiors/26.webp",
+      "origKb": 75.8,
+      "webpKb": 56.1,
+      "savedPercent": 26
+    },
+    {
+      "origFile": "public/images/interiors/27.jpeg",
+      "webpFile": "public/images/interiors/27.webp",
+      "origKb": 99.7,
+      "webpKb": 88,
+      "savedPercent": 11.7
+    },
+    {
+      "origFile": "public/images/interiors/28.jpeg",
+      "webpFile": "public/images/interiors/28.webp",
+      "origKb": 78.4,
+      "webpKb": 60.6,
+      "savedPercent": 22.7
+    },
+    {
+      "origFile": "public/images/interiors/3.jpeg",
+      "webpFile": "public/images/interiors/3.webp",
+      "origKb": 87.9,
+      "webpKb": 75.7,
+      "savedPercent": 14
+    },
+    {
+      "origFile": "public/images/interiors/30.jpeg",
+      "webpFile": "public/images/interiors/30.webp",
+      "origKb": 69.2,
+      "webpKb": 56,
+      "savedPercent": 19.1
+    },
+    {
+      "origFile": "public/images/interiors/32.jpeg",
+      "webpFile": "public/images/interiors/32.webp",
+      "origKb": 73.6,
+      "webpKb": 54.7,
+      "savedPercent": 25.7
+    },
+    {
+      "origFile": "public/images/interiors/33.jpeg",
+      "webpFile": "public/images/interiors/33.webp",
+      "origKb": 75.1,
+      "webpKb": 60.5,
+      "savedPercent": 19.4
+    },
+    {
+      "origFile": "public/images/interiors/34.jpeg",
+      "webpFile": "public/images/interiors/34.webp",
+      "origKb": 82,
+      "webpKb": 66.2,
+      "savedPercent": 19.2
+    },
+    {
+      "origFile": "public/images/interiors/37.jpeg",
+      "webpFile": "public/images/interiors/37.webp",
+      "origKb": 71.8,
+      "webpKb": 55.2,
+      "savedPercent": 23.1
+    },
+    {
+      "origFile": "public/images/interiors/38.jpeg",
+      "webpFile": "public/images/interiors/38.webp",
+      "origKb": 84.2,
+      "webpKb": 69,
+      "savedPercent": 18.1
+    },
+    {
+      "origFile": "public/images/interiors/4.jpeg",
+      "webpFile": "public/images/interiors/4.webp",
+      "origKb": 115.2,
+      "webpKb": 100.1,
+      "savedPercent": 13.1
+    },
+    {
+      "origFile": "public/images/interiors/42.jpeg",
+      "webpFile": "public/images/interiors/42.webp",
+      "origKb": 73.6,
+      "webpKb": 55.5,
+      "savedPercent": 24.6
+    },
+    {
+      "origFile": "public/images/interiors/43.jpeg",
+      "webpFile": "public/images/interiors/43.webp",
+      "origKb": 67.7,
+      "webpKb": 51.7,
+      "savedPercent": 23.6
+    },
+    {
+      "origFile": "public/images/interiors/45.jpeg",
+      "webpFile": "public/images/interiors/45.webp",
+      "origKb": 34.5,
+      "webpKb": 24.2,
+      "savedPercent": 29.8
+    },
+    {
+      "origFile": "public/images/interiors/46.jpeg",
+      "webpFile": "public/images/interiors/46.webp",
+      "origKb": 67.8,
+      "webpKb": 51.9,
+      "savedPercent": 23.4
+    },
+    {
+      "origFile": "public/images/interiors/47.jpeg",
+      "webpFile": "public/images/interiors/47.webp",
+      "origKb": 35,
+      "webpKb": 24.5,
+      "savedPercent": 30.1
+    },
+    {
+      "origFile": "public/images/interiors/48.jpeg",
+      "webpFile": "public/images/interiors/48.webp",
+      "origKb": 70.5,
+      "webpKb": 50.8,
+      "savedPercent": 27.9
+    },
+    {
+      "origFile": "public/images/interiors/5.jpeg",
+      "webpFile": "public/images/interiors/5.webp",
+      "origKb": 78.1,
+      "webpKb": 65.1,
+      "savedPercent": 16.6
+    },
+    {
+      "origFile": "public/images/interiors/50.jpeg",
+      "webpFile": "public/images/interiors/50.webp",
+      "origKb": 53.3,
+      "webpKb": 39.6,
+      "savedPercent": 25.7
+    },
+    {
+      "origFile": "public/images/interiors/6.jpeg",
+      "webpFile": "public/images/interiors/6.webp",
+      "origKb": 72,
+      "webpKb": 58.8,
+      "savedPercent": 18.4
+    },
+    {
+      "origFile": "public/images/interiors/60.jpeg",
+      "webpFile": "public/images/interiors/60.webp",
+      "origKb": 80.5,
+      "webpKb": 60.9,
+      "savedPercent": 24.3
+    },
+    {
+      "origFile": "public/images/interiors/68.jpeg",
+      "webpFile": "public/images/interiors/68.webp",
+      "origKb": 92.8,
+      "webpKb": 82.2,
+      "savedPercent": 11.4
+    },
+    {
+      "origFile": "public/images/interiors/7.jpeg",
+      "webpFile": "public/images/interiors/7.webp",
+      "origKb": 72.4,
+      "webpKb": 55.2,
+      "savedPercent": 23.8
+    },
+    {
+      "origFile": "public/images/interiors/73.jpeg",
+      "webpFile": "public/images/interiors/73.webp",
+      "origKb": 57.7,
+      "webpKb": 52.7,
+      "savedPercent": 8.7
+    },
+    {
+      "origFile": "public/images/interiors/74.jpeg",
+      "webpFile": "public/images/interiors/74.webp",
+      "origKb": 106.5,
+      "webpKb": 109.9,
+      "savedPercent": -3.2
+    },
+    {
+      "origFile": "public/images/interiors/75.jpeg",
+      "webpFile": "public/images/interiors/75.webp",
+      "origKb": 95.3,
+      "webpKb": 83.5,
+      "savedPercent": 12.4
+    },
+    {
+      "origFile": "public/images/interiors/8.jpeg",
+      "webpFile": "public/images/interiors/8.webp",
+      "origKb": 83.9,
+      "webpKb": 71.6,
+      "savedPercent": 14.6
+    },
+    {
+      "origFile": "public/images/interiors/80.jpeg",
+      "webpFile": "public/images/interiors/80.webp",
+      "origKb": 62.2,
+      "webpKb": 48,
+      "savedPercent": 22.9
+    },
+    {
+      "origFile": "public/images/interiors/81.jpeg",
+      "webpFile": "public/images/interiors/81.webp",
+      "origKb": 79.2,
+      "webpKb": 68.5,
+      "savedPercent": 13.5
+    },
+    {
+      "origFile": "public/images/interiors/82.jpeg",
+      "webpFile": "public/images/interiors/82.webp",
+      "origKb": 76.2,
+      "webpKb": 61.3,
+      "savedPercent": 19.5
+    },
+    {
+      "origFile": "public/images/interiors/83.jpeg",
+      "webpFile": "public/images/interiors/83.webp",
+      "origKb": 67.8,
+      "webpKb": 65.2,
+      "savedPercent": 3.9
+    },
+    {
+      "origFile": "public/images/interiors/85.jpeg",
+      "webpFile": "public/images/interiors/85.webp",
+      "origKb": 90,
+      "webpKb": 76.6,
+      "savedPercent": 14.9
+    },
+    {
+      "origFile": "public/images/interiors/87.jpeg",
+      "webpFile": "public/images/interiors/87.webp",
+      "origKb": 115,
+      "webpKb": 106.8,
+      "savedPercent": 7.2
+    },
+    {
+      "origFile": "public/images/interiors/88.jpeg",
+      "webpFile": "public/images/interiors/88.webp",
+      "origKb": 148,
+      "webpKb": 168.8,
+      "savedPercent": -14
+    },
+    {
+      "origFile": "public/images/interiors/9.jpeg",
+      "webpFile": "public/images/interiors/9.webp",
+      "origKb": 70.7,
+      "webpKb": 59.4,
+      "savedPercent": 15.9
+    },
+    {
+      "origFile": "public/images/interiors/94.jpeg",
+      "webpFile": "public/images/interiors/94.webp",
+      "origKb": 115,
+      "webpKb": 120.6,
+      "savedPercent": -4.8
+    },
+    {
+      "origFile": "public/images/interiors/95.jpeg",
+      "webpFile": "public/images/interiors/95.webp",
+      "origKb": 120.3,
+      "webpKb": 116.6,
+      "savedPercent": 3.1
+    },
+    {
+      "origFile": "public/images/interiors/97.jpeg",
+      "webpFile": "public/images/interiors/97.webp",
+      "origKb": 90.9,
+      "webpKb": 76.7,
+      "savedPercent": 15.7
+    },
+    {
+      "origFile": "public/images/interiors/bedroom.jpg",
+      "webpFile": "public/images/interiors/bedroom.webp",
+      "origKb": 66.8,
+      "webpKb": 54.3,
+      "savedPercent": 18.7
+    },
+    {
+      "origFile": "public/images/interiors/ceiling-lighting.jpg",
+      "webpFile": "public/images/interiors/ceiling-lighting.webp",
+      "origKb": 82.9,
+      "webpKb": 72.9,
+      "savedPercent": 12.1
+    },
+    {
+      "origFile": "public/images/interiors/custom-woodcraft.jpg",
+      "webpFile": "public/images/interiors/custom-woodcraft.webp",
+      "origKb": 66.5,
+      "webpKb": 52.2,
+      "savedPercent": 21.4
+    },
+    {
+      "origFile": "public/images/interiors/living-room.jpg",
+      "webpFile": "public/images/interiors/living-room.webp",
+      "origKb": 83.6,
+      "webpKb": 67.1,
+      "savedPercent": 19.8
+    },
+    {
+      "origFile": "public/images/interiors/modular-kitchen.jpg",
+      "webpFile": "public/images/interiors/modular-kitchen.webp",
+      "origKb": 63.6,
+      "webpKb": 54.4,
+      "savedPercent": 14.6
+    },
+    {
+      "origFile": "public/images/interiors/wardrobes-storage.jpg",
+      "webpFile": "public/images/interiors/wardrobes-storage.webp",
+      "origKb": 109.5,
+      "webpKb": 106.4,
+      "savedPercent": 2.8
+    },
+    {
+      "origFile": "public/images/og.jpg",
+      "webpFile": "public/images/og.webp",
+      "origKb": 63.5,
+      "webpKb": 40.8,
+      "savedPercent": 35.7
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+# ==============================================================================
+# Creative Interiors & Woodcraft — Production .gitignore
+# Enterprise-grade Git exclusion rules for Next.js 16 + React 19 + TypeScript
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Dependencies
+# ------------------------------------------------------------------------------
+node_modules/
+/.pnp
+.pnp.js
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# ------------------------------------------------------------------------------
+# 2. Next.js Build & Static Outputs
+# ------------------------------------------------------------------------------
+/.next/
+/out/
+/build/
+/dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# ------------------------------------------------------------------------------
+# 3. Environment Variables & Secret Credentials
+# ------------------------------------------------------------------------------
+# Protect private environment files & keys
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Always track example configuration templates
+!.env.example
+
+# Private certificates and keys
+*.pem
+*.key
+*.cert
+*.crt
+
+# ------------------------------------------------------------------------------
+# 4. Local Database, Fallback Queue & Runtime Data
+# ------------------------------------------------------------------------------
+/.data/
+/.tmp/
+/tmp/
+/temp/
+*.tmp
+*.bak
+*.backup
+
+# ------------------------------------------------------------------------------
+# 5. Debugging & Runtime Logs
+# ------------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------------------------------------------
+# 6. Turborepo & Vercel Deployments
+# ------------------------------------------------------------------------------
+.turbo/
+.vercel/
+
+# ------------------------------------------------------------------------------
+# 7. Code Quality, Coverage & Testing
+# ------------------------------------------------------------------------------
+/coverage/
+*.lcov
+.nyc_output/
+
+# ------------------------------------------------------------------------------
+# 8. Operating System Junk & System Artifacts
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ------------------------------------------------------------------------------
+# 9. IDE, Code Editor & Workspace Settings
+# ------------------------------------------------------------------------------
+# JetBrains / WebStorm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Visual Studio Code (personal user settings & caches)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Vim / Emacs swap and backup files
+*.swp
+*.swo
+*~
+\#*\#
+.#*
