@@ -266,7 +266,8 @@ export async function POST(request: Request) {
 
   const webhookUrl = process.env.ENQUIRY_WEBHOOK_URL?.trim();
   const resendKey = process.env.RESEND_API_KEY?.trim();
-  const notificationEmail = process.env.ENQUIRY_NOTIFICATION_EMAIL?.trim();
+  const notificationEmail =
+    process.env.ENQUIRY_NOTIFICATION_EMAIL?.trim() || "interiorscreative083@gmail.com";
   const isProduction = process.env.NODE_ENV === "production";
 
   // In production, require at least one verified durable delivery target

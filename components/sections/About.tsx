@@ -86,6 +86,7 @@ export default function About() {
                   src={about.images.primary}
                   alt={about.images.primaryAlt}
                   fill
+                  quality={100}
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover transition-transform duration-700 hover:scale-[1.02]"
                 />
@@ -97,8 +98,9 @@ export default function About() {
                   src={about.images.secondary}
                   alt={about.images.secondaryAlt}
                   fill
+                  quality={100}
                   sizes="(min-width: 1024px) 20vw, 40vw"
-                  className="object-fill transition-transform duration-700 hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-700 hover:scale-[1.03]"
                 />
               </div>
 
@@ -108,6 +110,7 @@ export default function About() {
                   src={about.images.tertiary}
                   alt={about.images.tertiaryAlt}
                   fill
+                  quality={100}
                   sizes="(min-width: 1024px) 30vw, 60vw"
                   className="object-cover transition-transform duration-700 hover:scale-[1.03]"
                 />

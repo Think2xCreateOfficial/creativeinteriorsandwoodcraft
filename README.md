@@ -96,7 +96,7 @@ cp .env.example .env.local
 
 | Variable | Required | Description |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Yes | Canonical production origin (e.g. `https://creativeinteriorswoodcraft.com`) |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Canonical production origin (e.g. `https://creativeinteriorsandwoodcraft.think2xcreate.com`) |
 | `ENQUIRY_WEBHOOK_URL` | Prod | Webhook endpoint for leads (Zapier, Make, CRM) |
 | `ENQUIRY_WEBHOOK_SECRET` | No | Shared HMAC / secret passed in `x-webhook-secret` |
 | `RESEND_API_KEY` | Prod | Resend API key for instant lead email notifications |

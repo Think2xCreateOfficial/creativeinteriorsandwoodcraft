@@ -5,7 +5,6 @@ import "./globals.css";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import MobileActionBar from "@/components/layout/MobileActionBar";
 import SmoothScroll from "@/components/system/SmoothScroll";
 import PageLoader from "@/components/ui/PageLoader";
 import LeadGenerationModal from "@/components/ui/LeadGenerationModal";
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   alternates: {
-    canonical: "/",
+    canonical: site.url,
   },
   icons: {
     icon: [
@@ -74,10 +73,20 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/images/og.jpg",
+        url: `${site.url}/images/og.jpg`,
+        secureUrl: `${site.url}/images/og.jpg`,
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
+        alt: "Creative Interiors & Woodcraft — Interior Architecture, Modular Kitchens & Custom Woodwork Chennai",
+      },
+      {
+        url: `${site.url}/images/og-square.jpg`,
+        secureUrl: `${site.url}/images/og-square.jpg`,
         width: 800,
         height: 800,
-        alt: "Creative Interiors & Woodcraft — Thoughtful Spaces. Beautiful Craftsmanship.",
+        type: "image/jpeg",
+        alt: "Creative Interiors & Woodcraft",
       },
     ],
   },
@@ -85,7 +94,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/og.jpg"],
+    images: [`${site.url}/images/og.jpg`],
   },
   robots: {
     index: true,
@@ -122,6 +131,7 @@ const structuredData = {
         "Bespoke home interiors, modular kitchens, custom wardrobes, and architectural woodcraft in Mogappair East, Anna Nagar, and across Chennai.",
       url: site.url,
       telephone: site.phone.raw,
+      email: site.email.address,
       priceRange: "₹₹ - ₹₹₹",
       currenciesAccepted: "INR",
       paymentAccepted: "Cash, Credit Card, UPI, Bank Transfer",
@@ -209,7 +219,6 @@ export default function RootLayout({
         {children}
 
         <Footer />
-        <MobileActionBar />
         <LeadGenerationModal />
 
         <script

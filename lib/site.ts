@@ -1,21 +1,33 @@
 /**
  * Central business configuration.
  *
- * Everything a non-developer may need to change lives here (or in
- * lib/content.ts): phone number, address, hours, rating, map links and
- * social profiles. Components read from this file only.
+ * Single source of truth for business details: name, email, phone, address,
+ * website domain, hours, rating, map links, and navigation items.
+ * All components consume this centralized configuration.
  */
 
+export const businessConfig = {
+  name: "Creative Interiors & Woodcraft",
+  shortName: "Creative Interiors",
+  monogram: "CI",
+  email: "interiorscreative083@gmail.com",
+  phone: "9500183310",
+  countryCode: "91",
+  phoneDisplay: "+91 95001 83310",
+  phoneRaw: "+919500183310",
+  phoneHref: "tel:+919500183310",
+  emailHref: "mailto:interiorscreative083@gmail.com",
+  website: "https://creativeinteriorsandwoodcraft.think2xcreate.com/",
+  whatsappNumber: "919500183310",
+  whatsappBaseUrl: "https://wa.me/919500183310",
+} as const;
+
 const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://creativeinteriorswoodcraft.com"
+  process.env.NEXT_PUBLIC_SITE_URL ?? businessConfig.website
 ).replace(/\/$/, "");
 
-const phoneDisplay = "+91 95001 83310";
-const phoneRaw = "+919500183310";
-const whatsappNumber = "919500183310";
-
 const address = {
-  name: "Creative Interiors & Woodcraft",
+  name: businessConfig.name,
   line1: "17, Eval Street",
   line2: "Golden George Nagar",
   line3: "Mogappair East",
@@ -37,26 +49,34 @@ const addressQuery = encodeURIComponent(
   `${address.name}, ${address.line1}, ${address.line2}, ${address.line3}, ${address.city}, ${address.state} ${address.postalCode}`,
 );
 
-const whatsappMessage = encodeURIComponent(
+const defaultWhatsappMessage = encodeURIComponent(
   "Hello Creative Interiors & Woodcraft, I would like to discuss an interior design project.",
 );
 
 export const site = {
   url: siteUrl,
-  name: address.name,
-  shortName: "Creative Interiors",
-  monogram: "CI",
+  name: businessConfig.name,
+  shortName: businessConfig.shortName,
+  monogram: businessConfig.monogram,
   category: "Interior Designer",
   tagline: "Home Interiors & Woodwork",
   locality: "Mogappair East, Chennai",
+  email: {
+    address: businessConfig.email,
+    display: businessConfig.email,
+    href: businessConfig.emailHref,
+  },
   phone: {
-    display: phoneDisplay,
-    href: `tel:${phoneRaw}`,
-    raw: phoneRaw,
+    display: businessConfig.phoneDisplay,
+    href: businessConfig.phoneHref,
+    raw: businessConfig.phoneRaw,
+    number: businessConfig.phone,
+    countryCode: businessConfig.countryCode,
   },
   whatsapp: {
-    href: `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
-    number: whatsappNumber,
+    href: `${businessConfig.whatsappBaseUrl}?text=${defaultWhatsappMessage}`,
+    baseUrl: businessConfig.whatsappBaseUrl,
+    number: businessConfig.whatsappNumber,
   },
   address: {
     ...address,
@@ -64,7 +84,6 @@ export const site = {
     oneLine: `${address.line1}, ${address.line2}, ${address.line3}, ${address.city}, ${address.state} – ${address.postalCode}`,
   },
   hours: {
-    // Verified: the business is open until 08:00 AM - 10:00 PM.
     summary: "Open until 08:00 AM - 10:00 PM",
     detail:
       "Open until 08:00 AM - 10:00 PM. Call ahead to confirm timings on the day of your visit.",
@@ -72,23 +91,18 @@ export const site = {
   rating: {
     value: 5.0,
     count: 14,
-    // Only ever the Google rating supplied by the business — no invented reviews.
     display: "5.0",
     source: "Google",
   },
   google: {
-    // Google Business Profile: searching the business name + address opens the
-    // profile card on Google Maps, where the reviews live.
     profileUrl: `https://www.google.com/maps/search/?api=1&query=${addressQuery}`,
     reviewsUrl: `https://www.google.com/maps/search/?api=1&query=${addressQuery}`,
     directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${addressQuery}`,
-    // Keyless Google Maps embed, configurable via env if a place ID is preferred.
     embedUrl:
       process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL ??
       `https://www.google.com/maps?q=${addressQuery}&z=16&output=embed`,
   },
   social: {
-    // Add real profile URLs when available; empty strings are not rendered.
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "",
     houzz: "",
@@ -103,7 +117,7 @@ export const site = {
   ],
   cta: {
     primary: { label: "Talk to Us", href: "#contact" },
-    secondary: { label: "See Our Work", href: "#interiors" },
+    secondary: { label: "See Our Work", href: "#services" },
   },
 } as const;
 

@@ -70,6 +70,14 @@ export default function Footer() {
                   {site.phone.display}
                 </a>
               </li>
+              <li>
+                <a
+                  href={site.email.href}
+                  className="text-white/80 transition-colors hover:text-white hover:underline"
+                >
+                  {site.email.address}
+                </a>
+              </li>
               <li className="not-italic text-white/70">
                 {site.address.lines.map((line) => (
                   <span key={line} className="block">

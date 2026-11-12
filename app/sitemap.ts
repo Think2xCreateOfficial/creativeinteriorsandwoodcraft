@@ -3,18 +3,18 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 
 /**
- * Fixed content revision date to prevent crawler churn across deployments.
- * Update whenever substantive editorial changes are published.
+ * Sitemap configuration for Creative Interiors & Woodcraft.
+ * Host domain: https://creativeinteriorsandwoodcraft.think2xcreate.com/
  */
-const CONTENT_LAST_MODIFIED = new Date("2026-03-30T00:00:00.000Z");
-
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
   return [
     {
-      url: site.url,
-      lastModified: CONTENT_LAST_MODIFIED,
-      changeFrequency: "monthly",
-      priority: 1,
+      url: `${site.url}/`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 1.0,
     },
   ];
 }

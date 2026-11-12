@@ -82,35 +82,36 @@ export default function Testimonials() {
         <div className="mt-14 md:mt-20 grid gap-10 lg:grid-cols-12 lg:gap-14 xl:gap-20 items-start">
           {/* Left Column: Authentic Project Photograph with refined crop */}
           <div className="lg:col-span-5 xl:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-soft-beige shadow-md border border-border-beige group">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-soft-beige shadow-md border border-border-beige group">
               <Image
                 src={activeItem.relatedImage}
                 alt={`${activeItem.reviewerName} interior woodwork project in Chennai`}
                 fill
+                quality={100}
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal-black/70 via-transparent to-black/20" />
 
               {/* Badges */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+              {/* <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                 <span className="rounded-full bg-white/90 backdrop-blur-md px-3.5 py-1 text-[10.5px] font-bold uppercase tracking-wider text-deep-brown shadow-xs">
                   Customer Experience
                 </span>
                 <span className="rounded-full bg-charcoal-black/75 backdrop-blur-md px-3 py-1 text-[10px] font-medium tracking-wide text-white">
                   {activeItem.source}
                 </span>
-              </div>
+              </div> */}
 
               {/* Bottom Caption on photo */}
-              <div className="absolute bottom-5 inset-x-5 text-white">
+              {/* <div className="absolute bottom-5 inset-x-5 text-white">
                 <p className="text-[11px] font-medium uppercase tracking-widest text-soft-beige">
                   {activeItem.location ?? "Chennai, Tamil Nadu"}
                 </p>
                 <h3 className="mt-1 font-sans text-[17px] font-bold leading-snug text-white">
                   {activeItem.relatedCategory}
                 </h3>
-              </div>
+              </div> */}
             </div>
           </div>
 

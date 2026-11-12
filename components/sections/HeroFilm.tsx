@@ -12,13 +12,11 @@ import { scrollToTarget } from "@/lib/scroll";
 import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect";
 
 /**
- * Cinematic hero: a sticky viewport over 350vh of scroll.
- *
- * - On all devices (desktop and mobile), the walkthrough video scrubs to the scroll
- *   position through one shared GSAP ticker.
- * - Mobile devices load the lightweight 540p encode (interior-tour-mobile.mp4)
- *   to eliminate seek contention and battery drain.
- * - Reduced-motion visitors get the static poster and normal scrolling.
+ * Responsive Hero Section:
+ * - On desktop (>=768px): sticky viewport over 200vh with smooth walkthrough video scrubbing.
+ * - On mobile (<768px): fluid, responsive 100svh immersive hero without decoder contention or scroll traps.
+ * - Prioritized LCP poster image guarantees instant visual render without blocking the main thread.
+ * - Full reduced-motion compliance.
  */
 export default function HeroFilm() {
   const rootRef = useRef<HTMLElement>(null);
@@ -50,39 +48,42 @@ export default function HeroFilm() {
     });
 
     const mm = gsap.matchMedia();
-    const progress = { value: 0 };
 
-    /* ----------------------------- entrance & scroll scrub ----------------------------- */
+    // Universal entrance animation for all viewports
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const intro = gsap.timeline({ delay: 0.15 });
+      const intro = gsap.timeline({ delay: 0.1 });
 
       intro
         .from(split.words, {
-          yPercent: 115,
-          duration: 1.35,
+          yPercent: 110,
+          duration: 1.2,
           ease: "power4.out",
-          stagger: 0.055,
+          stagger: 0.05,
         })
         .from(
           root.querySelectorAll("[data-hero-fade]"),
           {
-            y: 20,
+            y: 18,
             opacity: 0,
-            duration: 1,
+            duration: 0.85,
             ease: "power3.out",
-            stagger: 0.12,
+            stagger: 0.1,
           },
-          0.35,
+          0.3,
         )
         .from(
           cueRef.current,
-          { opacity: 0, duration: 0.9, ease: "power2.out" },
-          0.9,
+          { opacity: 0, duration: 0.8, ease: "power2.out" },
+          0.8,
         );
+    });
 
+    // Desktop only: Smooth ScrollTrigger video scrub
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
       const element = video;
       if (!element) return;
 
+      const progress = { value: 0 };
       let ready = false;
       let smoothed = 0;
 
@@ -100,43 +101,12 @@ export default function HeroFilm() {
         ready = true;
       };
 
-      const markLoading = () => {
-        ready = false;
-      };
-
       element.addEventListener("loadeddata", markReady);
       element.addEventListener("canplay", markReady);
       element.addEventListener("loadedmetadata", markReady);
-      element.addEventListener("waiting", markLoading);
-      element.addEventListener("stalled", markLoading);
-      element.addEventListener("seeking", markLoading);
       element.addEventListener("seeked", markReady);
-      element.addEventListener("error", markLoading);
 
-      // iOS/Safari inline playback unlock: play then immediately pause
-      const prime = () => {
-        if (!element) return;
-        element.muted = true;
-        const playing = element.play();
-        if (playing && typeof playing.then === "function") {
-          playing
-            .then(() => {
-              element.pause();
-              element.currentTime = 0.001;
-              markReady();
-            })
-            .catch(() => {});
-        }
-      };
-
-      const onFirstTouch = () => prime();
-      window.addEventListener("touchstart", onFirstTouch, {
-        once: true,
-        passive: true,
-      });
-
-      if (element.readyState >= 1) prime();
-      else element.addEventListener("loadedmetadata", prime, { once: true });
+      if (element.readyState >= 2) markReady();
 
       let cueVisible = true;
 
@@ -147,12 +117,12 @@ export default function HeroFilm() {
         onUpdate: (self) => {
           progress.value = self.progress;
 
-          const shouldShowCue = self.progress < 0.015;
+          const shouldShowCue = self.progress < 0.02;
           if (shouldShowCue !== cueVisible && cueRef.current) {
             cueVisible = shouldShowCue;
             gsap.to(cueRef.current, {
               opacity: cueVisible ? 1 : 0,
-              duration: 0.35,
+              duration: 0.3,
               overwrite: true,
             });
           }
@@ -173,8 +143,7 @@ export default function HeroFilm() {
         );
         smoothed += (target - smoothed) * 0.22;
 
-        // Throttle seeking to ~30fps frame interval (0.033s) to prevent hardware decoder contention
-        if (Math.abs(smoothed - element.currentTime) > 0.033) {
+        if (Math.abs(smoothed - element.currentTime) > 0.04) {
           try {
             if ("fastSeek" in element && typeof (element as unknown as { fastSeek: (t: number) => void }).fastSeek === "function") {
               (element as unknown as { fastSeek: (t: number) => void }).fastSeek(smoothed);
@@ -192,16 +161,26 @@ export default function HeroFilm() {
       return () => {
         gsap.ticker.remove(tick);
         trigger.kill();
-        window.removeEventListener("touchstart", onFirstTouch);
         element.removeEventListener("loadeddata", markReady);
         element.removeEventListener("canplay", markReady);
         element.removeEventListener("loadedmetadata", markReady);
-        element.removeEventListener("waiting", markLoading);
-        element.removeEventListener("stalled", markLoading);
-        element.removeEventListener("seeking", markLoading);
         element.removeEventListener("seeked", markReady);
-        element.removeEventListener("error", markLoading);
       };
+    });
+
+    // Mobile only: Subtle auto-play ambient loop if allowed
+    mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+      const element = video;
+      if (!element) return;
+
+      element.muted = true;
+      element.loop = true;
+      const playPromise = element.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          // Poster image remains visible if autoplay is blocked
+        });
+      }
     });
 
     return () => {
@@ -214,17 +193,17 @@ export default function HeroFilm() {
     <section
       id="home"
       ref={rootRef}
-      aria-label="Interior design showreel"
-      className="relative min-h-[350vh] h-[350vh] bg-charcoal"
+      aria-label="Creative Interiors showreel"
+      className="relative min-h-[100svh] md:min-h-[200vh] md:h-[200vh] bg-charcoal"
     >
       <div className="sticky top-0 h-screen min-h-[100dvh] w-full overflow-hidden transform-gpu [backface-visibility:hidden]">
         <Image
           src={film.poster}
-          alt=""
+          alt="Creative Interiors & Woodcraft living room and architectural woodwork"
           fill
           priority
           sizes="100vw"
-          quality={82}
+          quality={100}
           className="object-cover object-center"
         />
 
@@ -240,35 +219,28 @@ export default function HeroFilm() {
             disablePictureInPicture
             className="absolute inset-0 h-full w-full object-cover object-center"
           >
-            <source
-              src={film.mobileSrc}
-              media="(max-width: 767px)"
-              type="video/mp4"
-            />
-            <source
-              src="/interior-tour-mobile.webm"
-              media="(max-width: 767px)"
-              type="video/webm"
-            />
+            {/* High-fidelity 1080p WebM (VP9) source for modern browsers */}
+            <source src="/interior-tour.webm" type="video/webm" />
+            {/* Master 1080p MP4 (H.264) source for universal high-definition playback */}
             <source src={film.src} type="video/mp4" />
           </video>
         )}
 
-        {/* Minimal scrims: enough contrast for type, never a heavy overlay */}
+        {/* Minimal scrims: enough contrast for typography without washing out imagery */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#26251f]/55 via-[#26251f]/20 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#171513]/60 via-[#171513]/25 to-transparent"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-[#26251f]/80 via-[#26251f]/35 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-[#171513]/85 via-[#171513]/40 to-transparent"
         />
 
         <div className="absolute inset-0 flex flex-col justify-end">
-          <div className="shell pb-10 pt-32 md:pb-14">
+          <div className="shell pb-10 pt-28 md:pb-14">
             <p
               data-hero-fade
-              className="eyebrow text-ivory/70 before:bg-ivory/45"
+              className="eyebrow text-ivory/80 before:bg-ivory/50"
             >
               {content.hero.label}
             </p>
@@ -281,10 +253,10 @@ export default function HeroFilm() {
               {content.hero.heading}
             </h1>
 
-            <div className="mt-4 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div className="mt-4 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <p
                 data-hero-fade
-                className="max-w-md text-[14.5px] leading-relaxed text-ivory/75 md:text-[15px]"
+                className="max-w-md text-[14.5px] leading-relaxed text-ivory/80 md:text-[15px]"
               >
                 {content.hero.description}
               </p>
@@ -299,17 +271,15 @@ export default function HeroFilm() {
                   className="btn border-ivory bg-ivory text-charcoal hover:border-bronze hover:bg-bronze hover:text-white"
                 >
                   {content.hero.primaryCta.label}
-                  <ArrowDown size={15} strokeWidth={1.6} aria-hidden />
+                  <ArrowDown size={15} strokeWidth={1.8} aria-hidden />
                 </button>
                 <button
                   type="button"
-                  onClick={() =>
-                    scrollToTarget(content.hero.secondaryCta.href)
-                  }
+                  onClick={() => scrollToTarget(content.hero.secondaryCta.href)}
                   className="btn btn-light"
                 >
                   {content.hero.secondaryCta.label}
-                  <ArrowUpRight size={15} strokeWidth={1.6} aria-hidden />
+                  <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden />
                 </button>
               </div>
             </div>
@@ -321,7 +291,7 @@ export default function HeroFilm() {
           className="pointer-events-none absolute bottom-10 right-[var(--edge)] hidden flex-col items-center gap-4 lg:flex"
           aria-hidden
         >
-          <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-ivory/70 [writing-mode:vertical-rl]">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-ivory/70 [writing-mode:vertical-rl]">
             {content.hero.scrollLabel}
           </span>
           <span className="relative block h-16 w-px overflow-hidden bg-ivory/25">

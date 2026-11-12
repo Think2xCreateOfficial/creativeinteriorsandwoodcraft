@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
-import { X, MessageCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import { X, ArrowRight, CheckCircle2 } from "lucide-react";
 import { site } from "@/lib/site";
 import { setScrollLocked } from "@/lib/scroll";
 
@@ -142,15 +142,19 @@ export default function LeadGenerationModal() {
     const lines = [
       "Hello Creative Interiors & Woodcraft,",
       "",
-      "I'm interested in your interior services.",
+      "I would like to enquire about your interior services.",
+      "",
+      "Customer Details:",
       "",
       `Name: ${cleanName}`,
-      `WhatsApp: +91 ${cleanPhone}`,
+      `Phone: ${cleanPhone}`,
       `Project Type: ${projectType}`,
       `Location: ${location.trim() || "Chennai"}`,
-      requirement.trim() ? `Requirement: ${requirement.trim()}` : "",
+      requirement.trim() ? `Project Requirements:\n${requirement.trim()}` : "",
       "",
       "Please contact me to discuss my project.",
+      "",
+      "Thank you.",
     ].filter(Boolean);
 
     const messageText = encodeURIComponent(lines.join("\n"));
@@ -213,10 +217,11 @@ export default function LeadGenerationModal() {
           {/* Left Visual Panel (Desktop) */}
           <div className="relative hidden lg:col-span-5 lg:flex flex-col justify-between overflow-hidden bg-soft-beige p-8">
             <Image
-              src="/images/interiors/living-room.webp"
-              alt="Creative Interiors & Woodcraft living room craftsmanship"
+              src="/images/interiors/94.webp"
+              alt="Creative Interiors & Woodcraft residential interior craftsmanship"
               fill
-              sizes="320px"
+              quality={100}
+              sizes="360px"
               className="object-cover"
             />
             {/* Scrim Overlay */}
@@ -233,9 +238,6 @@ export default function LeadGenerationModal() {
             <div className="relative z-10 text-white">
               <p className="font-sans text-[22px] font-bold leading-snug tracking-tight">
                 Let&apos;s Create a Space You&apos;ll Love.
-              </p>
-              <p className="mt-2 text-[12.5px] leading-relaxed text-white/80">
-                Custom woodwork, modular kitchens, and residential interiors tailored to Chennai homes.
               </p>
             </div>
           </div>
@@ -264,9 +266,6 @@ export default function LeadGenerationModal() {
                   >
                     Planning Your Dream Interior?
                   </h3>
-                  <p className="mt-1 text-[13px] text-muted-grey leading-relaxed">
-                    Tell us a little about your project. Our team will connect with you on WhatsApp to discuss your requirements.
-                  </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-3.5">

@@ -19,14 +19,14 @@ export default function PageLoader() {
       return;
     }
 
-    // Playful loading animation display before elegant fade out
+    // Fast fade-out so initial hero content and LCP render without artificial delays
     const fadeTimer = window.setTimeout(() => {
       setFading(true);
-    }, 1100);
+    }, 300);
 
     const unmountTimer = window.setTimeout(() => {
       setMounted(false);
-    }, 1500);
+    }, 600);
 
     return () => {
       window.clearTimeout(fadeTimer);

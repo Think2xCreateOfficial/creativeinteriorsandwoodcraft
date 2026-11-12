@@ -13,7 +13,7 @@ async function convertDir(dir) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       results.push(...await convertDir(full));
-    } else if (/\.(jpe?g)$/i.test(entry.name)) {
+    } else if (/\.(jpe?g|png)$/i.test(entry.name)) {
       const ext = path.extname(entry.name);
       const baseName = path.basename(entry.name, ext);
       const webpName = `${baseName}.webp`;
@@ -22,9 +22,14 @@ async function convertDir(dir) {
       const origStat = fs.statSync(full);
       const origSize = origStat.size;
 
-      // High-fidelity WebP conversion (preserving color profiles, orientation, and dimensions)
+      // Original maximum-fidelity WebP conversion (4:4:4 full chroma, 100% quality, razor-sharp woodcraft details)
       await sharp(full)
-        .webp({ quality: 88, effort: 5, smartSubsample: true })
+        .webp({
+          quality: 100,
+          effort: 6,
+          smartSubsample: false,
+          lossless: false,
+        })
         .toFile(webpFull);
 
       const webpStat = fs.statSync(webpFull);

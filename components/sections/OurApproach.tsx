@@ -65,6 +65,7 @@ export default function OurApproach() {
                       src={step.image}
                       alt={step.alt}
                       fill
+                      quality={100}
                       sizes="(min-width: 1024px) 45vw, (min-width: 768px) 50vw, 100vw"
                       className="object-cover transition-transform duration-700 hover:scale-[1.03]"
                     />

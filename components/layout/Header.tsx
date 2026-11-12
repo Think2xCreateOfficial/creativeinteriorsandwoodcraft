@@ -71,6 +71,7 @@ export default function Header() {
 
       const onKeyDown = (event: KeyboardEvent) => {
         if (event.key === "Escape") {
+          setScrollLocked(false);
           setOpen(false);
           return;
         }
@@ -119,12 +120,22 @@ export default function Header() {
   }, [open]);
 
   const go = (hash: string) => {
+    // 1. Immediately unlock scrolling so the viewport can animate
+    setScrollLocked(false);
+    // 2. Close mobile navigation state
     setOpen(false);
+
     if (!isHome) {
       window.location.href = `/${hash}`;
       return;
     }
-    scrollToTarget(hash);
+
+    // 3. Small frame delay to allow overlay to begin fading and browser to register unlocked state
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        scrollToTarget(hash);
+      }, 50);
+    });
   };
 
   const light = isHome && overHero && !open;
@@ -232,19 +243,19 @@ export default function Header() {
               ref={triggerButtonRef}
               type="button"
               onClick={() => setOpen((value) => !value)}
-              className={`flex h-10 w-10 items-center justify-center border transition-colors duration-300 lg:hidden ${
+              className={`flex h-11 w-11 items-center justify-center rounded-sm border transition-colors duration-300 lg:hidden ${
                 light
-                  ? "border-ivory/40 text-ivory"
-                  : "border-charcoal/20 text-charcoal hover:border-charcoal"
+                  ? "border-ivory/40 text-ivory hover:bg-white/10"
+                  : "border-charcoal/20 text-charcoal hover:border-charcoal hover:bg-black/5"
               }`}
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"
             >
               {open ? (
-                <X size={18} strokeWidth={1.5} aria-hidden />
+                <X size={20} strokeWidth={1.8} aria-hidden />
               ) : (
-                <Menu size={18} strokeWidth={1.5} aria-hidden />
+                <Menu size={20} strokeWidth={1.8} aria-hidden />
               )}
             </button>
           </div>
@@ -259,11 +270,11 @@ export default function Header() {
         aria-modal="true"
         aria-label="Navigation menu"
         aria-hidden={!open}
-        className={`fixed inset-0 z-[45] bg-white transition-[opacity,visibility] duration-500 ease-editorial lg:hidden ${
+        className={`fixed inset-0 z-[45] bg-white transition-[opacity,visibility] duration-400 ease-editorial lg:hidden ${
           open ? "visible opacity-100 pointer-events-auto" : "invisible opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex h-full flex-col justify-between overflow-y-auto px-[var(--edge)] pb-10 pt-[calc(var(--header-height)+2rem)]">
+        <div className="flex h-full flex-col justify-between overflow-y-auto px-[var(--edge)] pb-10 pt-[calc(var(--header-height)+1.5rem)]">
           <nav aria-label="Mobile" className="flex flex-col">
             {site.nav.map((item, index) => (
               <a
@@ -275,17 +286,17 @@ export default function Header() {
                   }
                   go(item.href);
                 }}
-                className={`group flex items-baseline gap-4 border-b border-line py-4 transition-all duration-500 ${
+                className={`group flex min-h-[52px] items-center gap-4 border-b border-line py-3.5 transition-all duration-300 active:bg-soft-beige/50 ${
                   open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
                 }`}
                 style={{
-                  transitionDelay: open ? `${100 + index * 40}ms` : "0ms",
+                  transitionDelay: open ? `${80 + index * 30}ms` : "0ms",
                 }}
               >
-                <span className="text-[9px] font-medium tracking-[0.22em] text-medium-brown">
+                <span className="text-[10px] font-semibold tracking-[0.22em] text-medium-brown">
                   0{index + 1}
                 </span>
-                <span className="font-sans text-[clamp(1.75rem,6vw,2.4rem)] font-bold leading-tight tracking-[-0.03em] text-charcoal">
+                <span className="font-sans text-[clamp(1.5rem,5.5vw,2.1rem)] font-bold leading-tight tracking-[-0.025em] text-charcoal group-hover:text-deep-brown group-active:text-medium-brown">
                   {item.label}
                 </span>
               </a>
@@ -294,16 +305,24 @@ export default function Header() {
 
           {/* Bottom Action Area */}
           <div
-            className={`mt-8 transition-all delay-300 duration-500 ${
+            className={`mt-6 space-y-3 transition-all delay-200 duration-400 ${
               open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
             }`}
           >
             <a
               href={site.phone.href}
-              className="flex items-center justify-center gap-2 bg-charcoal px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-ivory transition-colors hover:bg-deep-brown"
+              className="flex min-h-[48px] items-center justify-center gap-2 bg-charcoal px-6 py-3 text-xs font-bold uppercase tracking-wider text-ivory transition-colors hover:bg-deep-brown active:bg-medium-brown"
             >
               <Phone size={15} />
-              Call {site.phone.display}
+              Call 
+            </a>
+            <a
+              href={site.whatsapp.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-[48px] items-center justify-center gap-2 border border-charcoal/25 px-6 py-3 text-xs font-bold uppercase tracking-wider text-charcoal transition-colors hover:bg-soft-beige"
+            >
+              WhatsApp Us
             </a>
           </div>
         </div>

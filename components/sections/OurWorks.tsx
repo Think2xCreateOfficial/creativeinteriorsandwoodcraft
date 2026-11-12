@@ -197,7 +197,8 @@ export default function OurWorks() {
                         src={project.image}
                         alt={project.title}
                         fill
-                        sizes="320px"
+                        quality={100}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                         className="object-cover"
                       />
                       {/* Gradient overlay for text legibility */}
@@ -205,9 +206,9 @@ export default function OurWorks() {
 
                       {/* Top badges */}
                       <div className="absolute top-4 inset-x-4 flex items-center justify-between">
-                        <span className="rounded-full bg-charcoal-black/60 backdrop-blur-md px-3 py-1 text-[10.5px] font-medium uppercase tracking-wider text-white border border-white/10">
+                        {/* <span className="rounded-full bg-charcoal-black/60 backdrop-blur-md px-3 py-1 text-[10.5px] font-medium uppercase tracking-wider text-white border border-white/10">
                           {project.category}
-                        </span>
+                        </span> */}
                         {ytId && (
                           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-deep-brown/80 backdrop-blur-md text-white">
                             <Video size={13} aria-hidden="true" />
@@ -231,14 +232,14 @@ export default function OurWorks() {
                       )}
 
                       {/* Bottom Caption */}
-                      <div className="absolute bottom-5 inset-x-5 text-left text-white">
+                      {/* <div className="absolute bottom-5 inset-x-5 text-left text-white">
                         <p className="text-[11px] font-medium uppercase tracking-widest text-soft-beige">
                           {project.location}
                         </p>
                         <h3 className="mt-1 font-sans text-[18px] font-bold leading-snug line-clamp-2">
                           {project.title}
                         </h3>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </div>
@@ -281,15 +282,16 @@ export default function OurWorks() {
                         src={project.image}
                         alt={project.title}
                         fill
-                        sizes="320px"
+                        quality={100}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                         className="object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-charcoal-black/90 via-charcoal-black/30 to-transparent" />
 
                       <div className="absolute top-4 inset-x-4 flex items-center justify-between">
-                        <span className="rounded-full bg-charcoal-black/60 backdrop-blur-md px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white">
+                        {/* <span className="rounded-full bg-charcoal-black/60 backdrop-blur-md px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white">
                           {project.category}
-                        </span>
+                        </span> */}
                         {ytId && (
                           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-deep-brown text-white">
                             <Video size={11} aria-hidden="true" />
@@ -311,14 +313,14 @@ export default function OurWorks() {
                         </button>
                       )}
 
-                      <div className="absolute bottom-5 inset-x-5 text-left text-white">
+                      {/* <div className="absolute bottom-5 inset-x-5 text-left text-white">
                         <p className="text-[10.5px] font-medium uppercase tracking-widest text-soft-beige">
                           {project.location}
                         </p>
                         <h3 className="mt-1 font-sans text-[16px] font-bold leading-snug">
                           {project.title}
                         </h3>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </div>

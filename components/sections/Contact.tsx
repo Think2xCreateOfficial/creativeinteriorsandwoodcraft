@@ -12,18 +12,22 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowUpRight,
+  Check,
   CheckCircle2,
   Clock,
-  Loader2,
+  Copy,
+  Mail,
   MapPin,
-  MessageCircle,
   Phone,
+  RotateCcw,
 } from "lucide-react";
 
 import { site } from "@/lib/site";
 import { content, serviceOptions } from "@/lib/content";
 import {
   EMPTY_ENQUIRY,
+  buildWhatsAppMessage,
+  getWhatsAppEnquiryUrl,
   validateEnquiry,
   type EnquiryErrors,
   type EnquiryField,
@@ -31,12 +35,12 @@ import {
 } from "@/lib/enquiry";
 import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "preparing" | "ready" | "error";
 
 const fieldLabels: Record<EnquiryField, string> = {
   name: "Your name",
-  phone: "Phone number",
-  email: "Email address",
+  phone: "Mobile number",
+  email: "Email address (optional)",
   service: "What do you need help with?",
   location: "Where is the home?",
   description: "Tell us what you need",
@@ -119,13 +123,13 @@ function Field({
           type={type}
           placeholder={placeholder}
           autoComplete={autoComplete}
-          inputMode={name === "phone" ? "tel" : undefined}
+          inputMode={name === "phone" ? "tel" : name === "email" ? "email" : undefined}
           className="field"
         />
       )}
 
       {error ? (
-        <p id={errorId} role="alert" className="mt-2 text-[11px] text-[#9c4a35]">
+        <p id={errorId} role="alert" className="mt-2 text-[11px] font-medium text-[#9c4a35]">
           {error}
         </p>
       ) : null}
@@ -138,20 +142,15 @@ export default function Contact() {
   const [errors, setErrors] = useState<EnquiryErrors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
-  const [submittedName, setSubmittedName] = useState("");
+  const [whatsappUrl, setWhatsappUrl] = useState("");
+  const [formattedMessage, setFormattedMessage] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const honeypotRef = useRef<HTMLInputElement>(null);
-  const startedAt = useRef<number>(0);
-  const idempotencyKeyRef = useRef<string>("");
-  const successRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    startedAt.current = Date.now();
-    idempotencyKeyRef.current = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-  }, []);
+  const readyBoxRef = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
     const section = sectionRef.current;
@@ -183,8 +182,8 @@ export default function Contact() {
   }, []);
 
   useEffect(() => {
-    if (status === "success") {
-      successRef.current?.focus();
+    if (status === "ready") {
+      readyBoxRef.current?.focus();
     }
   }, [status]);
 
@@ -199,8 +198,13 @@ export default function Contact() {
     }
   };
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Spam protection honeypot
+    if (honeypotRef.current?.value) {
+      return;
+    }
 
     const nextErrors = validateEnquiry(values);
     setErrors(nextErrors);
@@ -216,53 +220,50 @@ export default function Contact() {
       return;
     }
 
-    setStatus("submitting");
+    // Prepare WhatsApp message URL
+    setStatus("preparing");
     setMessage("");
 
+    const url = getWhatsAppEnquiryUrl(values);
+    const msg = buildWhatsAppMessage(values);
+
+    setWhatsappUrl(url);
+    setFormattedMessage(msg);
+    setStatus("ready");
+
+    // Attempt to open WhatsApp directly
     try {
-      const response = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...values,
-          website: honeypotRef.current?.value ?? "",
-          elapsedMs: Math.max(0, Date.now() - startedAt.current),
-          idempotencyKey: idempotencyKeyRef.current,
-        }),
-      });
-
-      const payload = (await response.json().catch(() => ({}))) as {
-        error?: string;
-        fields?: EnquiryErrors;
-      };
-
-      if (!response.ok) {
-        if (payload.fields) setErrors(payload.fields);
-        throw new Error(
-          payload.error ??
-          "We could not send your enquiry. Please try again or call us.",
-        );
+      const opened = window.open(url, "_blank", "noopener,noreferrer");
+      if (!opened) {
+        // Fallback if popup blocked
+        window.location.href = url;
       }
-
-      setSubmittedName(values.name.split(" ")[0] ?? values.name);
-      setValues(EMPTY_ENQUIRY);
-      setErrors({});
-      setStatus("success");
-      startedAt.current = Date.now();
-      idempotencyKeyRef.current = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-    } catch (error) {
-      setStatus("error");
-      setMessage(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please call or WhatsApp us instead.",
-      );
+    } catch {
+      // Fallback: the UI will present the direct link button
     }
   };
 
+  const handleCopy = async () => {
+    try {
+      if (formattedMessage) {
+        await navigator.clipboard.writeText(formattedMessage);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    } catch {
+      // Ignore clipboard write failures
+    }
+  };
+
+  const handleReset = () => {
+    setStatus("idle");
+    setMessage("");
+    setCopied(false);
+  };
+
   const liveMessage =
-    status === "success"
-      ? "Enquiry sent successfully."
+    status === "ready"
+      ? "Your enquiry message is ready. Please send it through WhatsApp."
       : status === "error"
         ? message
         : "";
@@ -277,10 +278,10 @@ export default function Contact() {
         <div ref={bgRef} className="absolute inset-[-6%]">
           <Image
             src="/images/contact.webp"
-            alt=""
+            alt="Creative Interiors & Woodcraft workshop and studio"
             fill
             sizes="100vw"
-            quality={80}
+            quality={100}
             className="object-cover object-center"
           />
         </div>
@@ -300,10 +301,11 @@ export default function Contact() {
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* Left: Studio details & map */}
           <div className="flex flex-col gap-6 lg:col-span-5">
             <div className="border border-line bg-white p-6 shadow-xs md:p-8">
-              <p className="text-xs font-bold text-muted">
-                Visit Us
+              <p className="text-xs font-bold uppercase tracking-wider text-muted">
+                Studio &amp; Workshop
               </p>
               <address className="mt-3 text-[14px] not-italic leading-relaxed text-charcoal">
                 {site.address.lines.map((line) => (
@@ -316,38 +318,53 @@ export default function Contact() {
               <div className="mt-6 space-y-4">
                 <a
                   href={site.phone.href}
-                  className="flex items-center gap-3 text-[14px] text-charcoal transition-colors hover:text-bronze"
+                  className="flex items-center gap-3 text-[14px] font-medium text-charcoal transition-colors hover:text-bronze"
                 >
                   <Phone
                     size={15}
-                    strokeWidth={1.5}
+                    strokeWidth={1.8}
                     aria-hidden
-                    className="text-bronze"
+                    className="text-bronze shrink-0"
                   />
-                  {site.phone.display}
+                  <span>{site.phone.display}</span>
                 </a>
+
+                <a
+                  href={site.email.href}
+                  className="flex items-center gap-3 text-[14px] text-charcoal transition-colors hover:text-bronze"
+                >
+                  <Mail
+                    size={15}
+                    strokeWidth={1.8}
+                    aria-hidden
+                    className="text-bronze shrink-0"
+                  />
+                  <span>{site.email.address}</span>
+                </a>
+
                 <p className="flex items-start gap-3 text-[13px] leading-relaxed text-muted">
                   <Clock
                     size={15}
-                    strokeWidth={1.5}
+                    strokeWidth={1.8}
                     aria-hidden
                     className="mt-0.5 shrink-0 text-bronze"
                   />
-                  {site.hours.detail}
+                  <span>{site.hours.detail}</span>
                 </p>
+
                 <a
                   href={site.google.directionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-[13px] text-charcoal transition-colors hover:text-bronze"
+                  className="flex items-center gap-3 text-[13px] font-medium text-charcoal transition-colors hover:text-bronze"
                 >
                   <MapPin
                     size={15}
-                    strokeWidth={1.5}
+                    strokeWidth={1.8}
                     aria-hidden
-                    className="text-bronze"
+                    className="text-bronze shrink-0"
                   />
-                  <span className="link-underline">Find Us</span>
+                  <span className="link-underline">Find Us on Google Maps</span>
                 </a>
               </div>
             </div>
@@ -369,67 +386,96 @@ export default function Contact() {
             </div>
           </div>
 
+          {/* Right: Enquiry Form / WhatsApp Preparation */}
           <div className="lg:col-span-7">
             <div className="border border-line bg-white p-6 shadow-[0_20px_60px_-40px_rgba(41,40,36,0.35)] sm:p-8 md:p-10">
-              {status === "success" ? (
+              {status === "ready" ? (
                 <div
-                  ref={successRef}
+                  ref={readyBoxRef}
                   tabIndex={-1}
-                  className="flex min-h-[420px] flex-col justify-center outline-none"
+                  className="flex min-h-[440px] flex-col justify-center outline-none animate-in fade-in duration-300"
                 >
-                  <CheckCircle2
-                    size={38}
-                    strokeWidth={1.1}
-                    aria-hidden
-                    className="text-bronze"
-                  />
-                  <h3 className="mt-6 font-sans text-[2rem] font-bold leading-tight tracking-[-0.03em] text-charcoal">
-                    Thank you{submittedName ? `, ${submittedName}` : ""}.
-                  </h3>
-                  <p className="mt-4 max-w-sm text-[13.5px] leading-relaxed text-muted">
-                    We got your message. We&rsquo;ll call you on the number you
-                    shared to talk about your home.
-                  </p>
-                  <p className="mt-4 max-w-sm text-[13.5px] leading-relaxed text-muted">
-                    Need to talk sooner? Call us at{" "}
+                  <div className="flex items-center gap-3">
+                    
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-medium-brown">
+                        WhatsApp Enquiry Ready
+                      </span>
+                      <h3 className="font-sans text-[1.65rem] font-bold leading-tight tracking-[-0.025em] text-charcoal">
+                        Your message has been prepared
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="mt-5 rounded-lg border border-line bg-soft-beige/50 p-4 text-[13px] text-charcoal leading-relaxed">
+                    <p className="font-semibold text-charcoal">
+                      Your enquiry message is ready. Please send it through WhatsApp to connect with our team.
+                    </p>
+                    <p className="mt-1 text-muted text-[12px]">
+                      Destination: Creative Interiors &amp; Woodcraft ({site.phone.display})
+                    </p>
+                  </div>
+
+                  {/* Message Preview Box */}
+                  <div className="mt-4 max-h-48 overflow-y-auto rounded-lg border border-line bg-pure-white p-3.5 text-xs text-charcoal/80 font-mono whitespace-pre-wrap">
+                    {formattedMessage}
+                  </div>
+
+                  {/* Primary & Secondary Action Controls */}
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                     <a
-                      href={site.phone.href}
-                      className="link-underline text-charcoal"
-                    >
-                      {site.phone.display}
-                    </a>
-                    .
-                  </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a
-                      href={site.whatsapp.href}
+                      href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-solid"
+                      className="flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-md bg-[#25D366] px-6 py-3.5 text-[13px] font-bold text-white shadow-sm transition-colors hover:bg-[#20ba59]"
                     >
-                      WhatsApp Us
-                      <MessageCircle size={15} strokeWidth={1.6} aria-hidden />
+                      Open WhatsApp to Send
                     </a>
+
                     <button
                       type="button"
-                      onClick={() => {
-                        setStatus("idle");
-                        setSubmittedName("");
-                      }}
-                      className="btn btn-outline"
+                      onClick={handleCopy}
+                      className="flex min-h-[48px] items-center justify-center gap-2 rounded-md border border-charcoal/20 bg-white px-5 py-3.5 text-[13px] font-semibold text-charcoal transition-colors hover:bg-soft-beige"
                     >
-                      Send Another Message
+                      {copied ? (
+                        <>
+                          <Check size={16} className="text-[#25D366]" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={16} />
+                          Copy Message
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between border-t border-line pt-4 text-xs text-muted">
+                    <span>Need to modify details?</span>
+                    <button
+                      type="button"
+                      onClick={handleReset}
+                      className="flex items-center gap-1.5 font-bold text-charcoal hover:text-bronze"
+                    >
+                      <RotateCcw size={13} />
+                      Edit Enquiry
                     </button>
                   </div>
                 </div>
               ) : (
                 <>
                   <div className="flex items-baseline justify-between gap-4 border-b border-line pb-5">
-                    <p className="font-sans text-[1.5rem] font-bold tracking-[-0.03em] text-charcoal">
-                      Tell Us About Your Home
-                    </p>
-                    <span className="text-[12px] text-muted">
-                      We reply during business hours
+                    <div>
+                      <p className="font-sans text-[1.5rem] font-bold tracking-[-0.03em] text-charcoal">
+                        Tell Us About Your Home
+                      </p>
+                      <p className="mt-1 text-xs text-muted">
+                        Submitting opens WhatsApp with your pre-filled project enquiry
+                      </p>
+                    </div>
+                    <span className="hidden sm:inline-block text-[11.5px] font-medium text-muted">
+                      Direct WhatsApp
                     </span>
                   </div>
 
@@ -446,7 +492,7 @@ export default function Contact() {
                         error={errors.name}
                         onChange={update}
                         autoComplete="name"
-                        placeholder="Your name"
+                        placeholder="Your full name"
                       />
                       <Field
                         name="phone"
@@ -455,7 +501,7 @@ export default function Contact() {
                         onChange={update}
                         type="tel"
                         autoComplete="tel"
-                        placeholder="+91"
+                        placeholder="10-digit mobile number"
                       />
                       <Field
                         name="email"
@@ -465,6 +511,7 @@ export default function Contact() {
                         type="email"
                         autoComplete="email"
                         placeholder="name@example.com"
+                        required={false}
                       />
                       <Field
                         name="service"
@@ -478,7 +525,7 @@ export default function Contact() {
                         value={values.location}
                         error={errors.location}
                         onChange={update}
-                        placeholder="Area or town (optional)"
+                        placeholder="Area in Chennai (e.g. Mogappair, Anna Nagar)"
                         required={false}
                         className="sm:col-span-2"
                       />
@@ -487,7 +534,7 @@ export default function Contact() {
                         value={values.description}
                         error={errors.description}
                         onChange={update}
-                        placeholder="Describe the work you need. Add any details that may help us."
+                        placeholder="Describe your home interior requirements, approximate size/BHK, timeline..."
                         textarea
                         className="sm:col-span-2"
                       />
@@ -503,33 +550,19 @@ export default function Contact() {
                       className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
                     />
 
-                    <div className="mt-8 flex flex-col gap-5">
+                    <div className="mt-8 flex flex-col gap-4">
                       <button
                         type="submit"
-                        disabled={status === "submitting"}
-                        className="btn btn-solid w-full disabled:cursor-not-allowed disabled:opacity-70"
+                        disabled={status === "preparing"}
+                        className="btn btn-solid w-full min-h-[48px] bg-charcoal text-ivory hover:bg-[#25D366] hover:text-white transition-colors disabled:cursor-not-allowed disabled:opacity-70"
                       >
-                        {status === "submitting" ? (
-                          <>
-                            Sending
-                            <Loader2
-                              size={16}
-                              strokeWidth={1.6}
-                              aria-hidden
-                              className="animate-spin"
-                            />
-                          </>
-                        ) : (
-                          <>
-                            {content.contact.submitLabel}
-                            <ArrowUpRight
-                              size={16}
-                              strokeWidth={1.6}
-                              aria-hidden
-                            />
-                          </>
-                        )}
+                        Send Enquiry via WhatsApp
+                        <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden />
                       </button>
+
+                      <p className="text-center text-[12px] text-muted">
+                        We respect your privacy. Direct communication with Creative Interiors &amp; Woodcraft.
+                      </p>
 
                       {status === "error" && message ? (
                         <div
@@ -541,9 +574,9 @@ export default function Contact() {
                             href={site.whatsapp.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="underline underline-offset-2"
+                            className="underline underline-offset-2 font-bold"
                           >
-                            WhatsApp us
+                            Click to WhatsApp directly
                           </a>
                           .
                         </div>
