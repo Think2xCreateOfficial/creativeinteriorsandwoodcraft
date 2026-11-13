@@ -36,7 +36,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Bedroom Design",
     description:
       "Serene master and guest bedroom spaces planned for restorative comfort, intelligent wardrobe integration, and balanced ambient lighting.",
-    image: "/images/interiors/bedroom.webp",
+    image: "/images/interiors/68.webp",
   },
   {
     id: "cabinetry-hardware",
@@ -44,7 +44,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Cabinetry and Hardware Design",
     description:
       "Custom timber cabinetry, soft-close hardware, and bespoke architectural storage built specifically for your home's layout.",
-    image: "/images/interiors/wardrobes-storage.webp",
+    image: "/images/interiors/94.webp",
   },
   {
     id: "dining-room-design",
@@ -52,7 +52,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Dining Room Design",
     description:
       "Inviting dining spaces featuring handcrafted timber dining furniture, custom crockery cabinets, and focused pendant illumination.",
-    image: "/images/interiors/custom-woodcraft.webp",
+    image: "/images/interiors/ceiling-lighting.webp",
   },
   {
     id: "home-decor-selection",
@@ -60,7 +60,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Home Decor Selection",
     description:
       "Thoughtfully chosen textures, wall finishes, decorative accessories, and organic wood accents that bring character to every room.",
-    image: "/images/details.webp",
+    image: "/images/interiors/32.webp",
   },
   {
     id: "interior-architectural-design",
@@ -68,7 +68,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Interior Architectural Design",
     description:
       "Complete spatial planning, structural partitioning, wall paneling, and interior proportioning for modern residential living.",
-    image: "/images/craft.webp",
+    image: "/images/interiors/88.webp",
   },
   {
     id: "interior-decorating",
@@ -92,7 +92,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Kitchen Design",
     description:
       "Ergonomic modular kitchens featuring marine-grade ply, acrylic shutters, quartz countertops, and high-efficiency corner pull-outs.",
-    image: "/images/interiors/modular-kitchen.webp",
+    image: "/images/interiors/33.webp",
   },
   {
     id: "lighting-design",
@@ -100,7 +100,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Lighting Design",
     description:
       "Layered architectural lighting combining warm cove recesses, concealed task strips, and signature accent fixtures.",
-    image: "/images/interiors/ceiling-lighting.webp",
+    image: "/images/interiors/50.webp",
   },
   {
     id: "living-room-design",
@@ -108,7 +108,7 @@ export const interiorSpaces: InteriorSpace[] = [
     title: "Living Room Design",
     description:
       "A warm, welcoming focal living area with custom television feature walls, timber fluting, and acoustic ceiling treatments.",
-    image: "/images/interiors/living-room.webp",
+    image: "/images/interiors/4.webp",
   },
 ];
 
@@ -204,7 +204,7 @@ export const content = {
         title: "Understand",
         description:
           "We begin by understanding your family's daily lifestyle, spatial requirements, storage priorities, and aesthetic taste before proposing design directions.",
-        image: "/images/interiors/12.webp",
+        image: "/images/interiors/3.webp",
         alt: "Contemporary residential interior consultation and living space planning",
       },
       {
@@ -212,7 +212,7 @@ export const content = {
         title: "Design",
         description:
           "We develop thoughtful 2D layouts and 3D visual directions that balance aesthetics, lighting flow, and ergonomic space optimization.",
-        image: "/images/interiors/28.webp",
+        image: "/images/interiors/75.webp",
         alt: "Functional modular kitchen and ergonomic cabinetry spatial design",
       },
       {
@@ -220,7 +220,7 @@ export const content = {
         title: "Craft",
         description:
           "Our dedicated carpenters and fabricators build cabinetry, wardrobes, TV units, and timber joinery using calibrated plywood and premium hardware.",
-        image: "/images/interiors/15.webp",
+        image: "/images/interiors/37.webp",
         alt: "Artisan woodwork with custom timber joinery and precision craftsmanship",
       },
       {
@@ -228,7 +228,7 @@ export const content = {
         title: "Complete",
         description:
           "We coordinate the turnkey installation, fit hardware with millimeter accuracy, perform quality inspections, and hand over your finished home.",
-        image: "/images/interiors/34.webp",
+        image: "/images/interiors/94.webp",
         alt: "Turnkey completed master residence with built-in wardrobe and ambient lighting",
       },
     ] as ApproachStep[],
@@ -254,7 +254,7 @@ export const content = {
         title: "Evaluation & Contemporary Living",
         category: "Living Room & Feature Wall",
         location: "Mogappair East, Chennai",
-        image: "/images/interiors/82.webp",
+        image: "/images/interiors/81.webp",
         youtubeUrl: "", // Centralized: paste YouTube video URL here when uploaded
         featured: false,
       },
@@ -263,7 +263,7 @@ export const content = {
         title: "Urban Minimalist Residence",
         category: "Complete Modular Kitchen",
         location: "Anna Nagar, Chennai",
-        image: "/images/interiors/68.webp",
+        image: "/images/interiors/46.webp",
         youtubeUrl: "", // Centralized: paste YouTube video URL here when uploaded
         featured: true,
       },
@@ -290,7 +290,7 @@ export const content = {
         title: "Custom Timber Joinery & Partition",
         category: "Architectural Woodwork",
         location: "Mogappair, Chennai",
-        image: "/images/interiors/85.webp",
+        image: "/images/interiors/42.webp",
         youtubeUrl: "",
         featured: false,
       },
