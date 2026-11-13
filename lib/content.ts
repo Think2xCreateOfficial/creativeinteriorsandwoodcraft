@@ -340,6 +340,42 @@ export const content = {
         source: "Google Business Profile",
       },
       {
+        id: "rev-sri-twin",
+        reviewerName: "Sri twin",
+        author: "Sri twin",
+        rating: 5,
+        designStyle: "Classic",
+        reviewText:
+          "We recently got our home interiors done by Creative Interiors, and we couldn't be happier with the outcome! From the initial 3D design consultation to the final handover, the entire process was smooth and transparent. The team really listened to our requirements and maximized our space with smart, modern designs. The quality of the materials and the finish on the modular kitchen and wardrobes are top-notch. Most importantly, they delivered on time without any hidden costs. Highly recommend them to anyone looking for reliable and creative interior designers!",
+        quote:
+          "From the initial 3D design consultation to the final handover, the entire process was smooth and transparent. The team maximized our space with smart, modern designs and delivered on time without hidden costs.",
+        relatedCategory: "Home Interiors, Modular Kitchen & Wardrobes",
+        projectTitle: "Home Interiors, Modular Kitchen & Wardrobes",
+        relatedImage: "/images/interiors/26.webp",
+        projectImage: "/images/interiors/26.webp",
+        location: "Chennai, Tamil Nadu",
+        featured: false,
+        source: "Google Business Profile",
+      },
+      {
+        id: "rev-arun-srinivasan",
+        reviewerName: "Arun Srinivasan",
+        author: "Arun Srinivasan",
+        rating: 5,
+        designStyle: "Classic, Modern, Elegant",
+        reviewText:
+          "Exceptional design sense, great material quality, and timely execution! Creative Interiors & Woodcraft exceeded our expectations in every way. Their team was very supportive throughout the project and brought our vision to life seamlessly. Truly value for money and highly recommended!",
+        quote:
+          "Exceptional design sense, great material quality, and timely execution! Their supportive team brought our vision to life seamlessly.",
+        relatedCategory: "Complete Home Interior & Woodcraft",
+        projectTitle: "Complete Home Interior & Woodcraft",
+        relatedImage: "/images/interiors/38.webp",
+        projectImage: "/images/interiors/38.webp",
+        location: "Chennai, Tamil Nadu",
+        featured: false,
+        source: "Google Business Profile",
+      },
+      {
         id: "rev-monica-shan",
         reviewerName: "Monica Shan",
         author: "Monica Shan",
